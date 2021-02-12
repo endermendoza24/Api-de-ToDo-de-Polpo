@@ -14,16 +14,16 @@ router.get('/', async(req, res ) =>{
 
 router.post('/', async(req, res) =>{
     // console.log(req.body); //  el navegador envia datos y se reciben através de eeste metodo
-    const {title, descripcion} = req.body;
-    const task = new Task({title, descripcion}); //  esto crea una nueva tarea
+    const {titulo, autor, descripcion, prioridad, estado} = req.body;
+    const task = new Task({titulo, autor, descripcion, prioridad, estado}); //  esto crea una nueva tarea
     console.log(task); 
-    await task.save(); //  estoa guarda los datos en la bd, pero de manera asíncrona
-    res.json({status:'task saved'});
+    await task.save(); //  esto guarda los datos en la bd, pero de manera asíncrona
+    res.json({status:'Tarea guardada'});
 });
 
 router.put('/:id', async(req, res) =>{
     const {title, descripcion} = req.body;
-    const newTask = {title, descripcion};
+    const newTask = {titulo, autor, descripcion, prioridad, estado};
     await Task.findByIdAndUpdate(req.params.id, newTask);
     console.log(req.params.id);
     res.json({status:'Tarea actualizada'});
@@ -33,7 +33,7 @@ router.put('/:id', async(req, res) =>{
 router.delete('/:id', async(req, res)=>{
     await Task.findByIdAndRemove(req.params.id);
     res.json({status:'tarea eliminada...'});
-})
+});
 
 
 
