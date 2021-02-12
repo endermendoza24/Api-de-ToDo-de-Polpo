@@ -4,7 +4,8 @@ const {Schema} = mongoose; //  esto permite tener el esquema de los datos, o sea
 
 const tareaEsquema = new Schema({
     title : {type: String, required:true},
-    descripcion : {type: String, required:true}
+    descripcion : {type: String, required:true},
+    
 })
 
 

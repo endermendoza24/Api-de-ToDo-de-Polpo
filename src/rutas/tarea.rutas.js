@@ -9,7 +9,7 @@ router.get('/', async(req, res ) =>{
 
     const task = await Task.find();
     console.log(task);
-    res.json('estupida y sensual programacion');
+    res.json(task);
 });
 
 router.post('/', async(req, res) =>{
@@ -19,8 +19,21 @@ router.post('/', async(req, res) =>{
     console.log(task); 
     await task.save(); //  estoa guarda los datos en la bd, pero de manera asíncrona
     res.json({status:'task saved'});
-})
+});
 
+router.put('/:id', async(req, res) =>{
+    const {title, descripcion} = req.body;
+    const newTask = {title, descripcion};
+    await Task.findByIdAndUpdate(req.params.id, newTask);
+    console.log(req.params.id);
+    res.json({status:'Tarea actualizada'});
+}); 
+
+
+router.delete('/:id', async(req, res)=>{
+    await Task.findByIdAndRemove(req.params.id);
+    res.json({status:'tarea eliminada...'});
+})
 
 
 
